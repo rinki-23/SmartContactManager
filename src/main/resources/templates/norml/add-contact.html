@@ -16,7 +16,7 @@
 					
 					<!-- used for image -->
 					<form action = "#" th:object = "${contact}" enctype = "multipart/form-data"
-					 method = "post" 
+					 method = "post" th:action = "@{/user/process-contact}"
 					class= "mt-2">
 					
 					<!-- first name field -->
@@ -94,10 +94,21 @@
 						
 						<!-- description -->
 						<div class = "form-group mt-3">
-							<textarea placeholder = "Enter contact description"name = "description" id = "description" class = "form-control" row = "20"></textarea>
+							<textarea placeholder = "Enter contact description"name = "description" id = "description" class = "form-control desc-box" row = "10"></textarea>
 						
 						</div>
 						
+						<!-- contact image -->
+						<div class = "custom-file">
+							<input type = "file" name = "profileImage">
+						
+						</div>
+						
+						<!-- add contact button -->
+						<div class = "container text-center">
+						<button class = "btn btn-outline-primary">Save Contact</button>
+						
+						</div>
 					</form>
 					
 					</div>
