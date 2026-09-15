@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:th = "http://www.thymeleaf.org" th:replace = "~{norml/base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>User Dash-board</title>
+</head>
+<body>
+	
+	<section>
+	
+	<h1>Name: <span th:text = "${User.name}"></span></h1>
+	<h1>Email: <span th:text = "${User.email}"></span></h1>
+	<h1>Role: <span th:text = "${User.role}"></span></h1>
+	<h1>About: <span th:text = "${User.about}"></span></h1>
+	
+	<h1><a href= "" th:href = "@{/logout}">Logout</a></h1>
+	
+	
+	</section>
+
+
+</body>
+</html>
