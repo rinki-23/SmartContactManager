@@ -14,7 +14,7 @@
 			<table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col">#Id</th>
       <th scope="col">Name</th>
       <th scope="col">Email</th>
       <th scope="col">Phone</th>
@@ -22,11 +22,25 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+    <tr th:each = "c:${contacts}">
+      <th scope="row" th:text = "${'SCM2026' + c.cid}">1</th>
+      <!-- show image -->
+      <td>
+      <img src ="" class = "my-profile-picture" th:src = "@{'/img/' + ${c.image}}" alt = "profilephoto">
+      <span th:text = "${c.name}">Mark</span>
+      </td>
+      
+      <td>
+      <a href = "" th:href = "@{'/user/'+${c.cid}+'/contact'}">
+      <span th:text = "${c.email}"></span>
+      </a>
+      
+      </td>
+      <td th:text = "${c.phoneno}">@mdo</td>
+      <td>
+      <button class = "btn btn-danger btn-sm">Delete</button>
+      <button class = "btn btn-danger btn-primary">Update</button>
+      </td>
     </tr>
  
   
@@ -34,6 +48,20 @@
     
   </tbody>
 </table>
+		<!-- pagination part -->
+		
+		<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li th:if = "${currentPage != 0}" class="page-item"><a class="page-link" th:href = "@{'/user/view-contacts/' + ${currentPage-1}}" 
+    href="#">Previous</a></li>
+    
+    <li th:classAppend = "${currentPage == i-1? 'active' : ''}" th:each = "i : ${#numbers.sequence(1, totalPage)}" 
+    class="page-item"><a th:href = "@{'/user/view-contacts/'+${i-1}}" 
+    class="page-link" href="#"><span th:text = "${i}"></span></a></li>
+   
+    <li th:if = "${currentPage+1 != totalPage}" class="page-item"><a class="page-link" th:href = "@{'/user/view-contacts/'+ ${currentPage+1}}" href="#">Next</a></li>
+  </ul>
+</nav>
 		
 		</div>
 	

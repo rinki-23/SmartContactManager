@@ -7,13 +7,18 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,6 +86,8 @@ public class UserController {
 			user.getContacts().add(contact);
 			if(file.isEmpty()) {
 				System.out.println("File is empty");
+				// add by default photo
+				contact.setImage("contact.jpg");
 			}
 			else {
 		
@@ -111,8 +118,9 @@ public class UserController {
 		return "norml/add-contact";
 	}
 	
-	@GetMapping("/view-contacts")
-	public String view(Model m, Principal principal) {
+	@GetMapping("/view-contacts/{page}")
+	public String view(@PathVariable("page") Integer page, Model m, Principal principal, HttpSession session) {
+		session.removeAttribute("message");
 		m.addAttribute("title", "View Contacts");
 		// first fetch the user name 
 		//String name = principal.getName();
@@ -124,10 +132,27 @@ public class UserController {
 		String name = principal.getName();
 		User user = userRepo.getUserByUserName(name);
 		
-		List<Contact> list = contactRepo.findContactsByUser(user.getId());
+		//current page-page
+		//contact per page-5
+		Pageable pageable = PageRequest.of(page, 5);
+		Page<Contact> list = contactRepo.findContactsByUser(user.getId(), pageable);
 		m.addAttribute("contacts", list);
 		
+		m.addAttribute("currentPage", page);
+		m.addAttribute("totalPage", list.getTotalPages());
 		
 		return "norml/view";
+	}
+	
+	// showing specific contact details
+	@GetMapping("/{cid}/contact")
+	public String showContactDetails(@PathVariable("cid") Integer cid, Model m) {
+		System.out.println(cid);
+		// get the all info using id
+		Optional<Contact> contact = contactRepo.findById(cid);
+		Contact c = contact.get();
+		
+		m.addAttribute("contact", c);
+		return "norml/contact-details";
 	}
 }
