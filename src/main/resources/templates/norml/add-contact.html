@@ -27,7 +27,7 @@
 							</div>
 					
 					</div>
-							<input type = "text" name = "name" placeholder = "Enter name here" class = "form-control py-2 ">
+							<input required type = "text" name = "name" placeholder = "Enter name here" class = "form-control py-2 ">
 
 						
 						
@@ -42,7 +42,7 @@
 								</div>
 					
 					</div>
-							<input type = "text" name = "nickname" placeholder = "Enter nickname here" class = "form-control py-2">
+							<input required type = "text" name = "nickname" placeholder = "Enter nickname here" class = "form-control py-2">
 	
 						
 					
@@ -58,7 +58,7 @@
 								</div>
 					
 					</div>
-							<input type = "number" name = "phone" placeholder = "Enter phone no. here" class = "form-control py-2">
+							<input required  type = "number" name = "phone" placeholder = "Enter phone no. here" class = "form-control py-2">
 	
 						
 					
@@ -73,7 +73,7 @@
 								</div>
 					
 					</div>
-							<input type = "email" name = "email" placeholder = "Enter email here" class = "form-control py-2">
+							<input required type = "email" name = "email" placeholder = "Enter email here" class = "form-control py-2">
 	
 						
 					
@@ -88,13 +88,13 @@
 							</div>
 					
 					</div>
-							<input type = "text" name = "work" placeholder = "Enter work here" class = "form-control py-2">
+							<input required type = "text" name = "work" placeholder = "Enter work here" class = "form-control py-2">
 	
 						</div>
 						
 						<!-- description -->
 						<div class = "form-group mt-3">
-							<textarea placeholder = "Enter contact description"name = "description" id = "description" class = "form-control desc-box" row = "10"></textarea>
+							<textarea id = "mytextarea" placeholder = "Enter contact description"name = "description" class = "form-control desc-box" row = "10"></textarea>
 						
 						</div>
 						
@@ -123,7 +123,12 @@
 	
 	</div>
 	
-	
+	<script src="https://cdn.tiny.cloud/1/k1qf30rtw5x64rf52g1wun6fards17rsv9lvyko0s3stjv5i/tinymce/5/tinymce.min.js"s></script>
+	 <script>
+      tinymce.init({
+        selector: '#mytextarea'
+      });
+    </script>
 	
 	</section>
 </body>
