@@ -120,7 +120,7 @@ public class UserController {
 	
 	@GetMapping("/view-contacts/{page}")
 	public String view(@PathVariable("page") Integer page, Model m, Principal principal, HttpSession session) {
-		session.removeAttribute("message");
+		
 		m.addAttribute("title", "View Contacts");
 		// first fetch the user name 
 		//String name = principal.getName();
@@ -146,13 +146,60 @@ public class UserController {
 	
 	// showing specific contact details
 	@GetMapping("/{cid}/contact")
-	public String showContactDetails(@PathVariable("cid") Integer cid, Model m) {
+	public String showContactDetails(@PathVariable("cid") Integer cid, Model m, Principal principal) {
 		System.out.println(cid);
 		// get the all info using id
 		Optional<Contact> contact = contactRepo.findById(cid);
 		Contact c = contact.get();
 		
-		m.addAttribute("contact", c);
+		// for security
+		String username = principal.getName();
+		User user= userRepo.getUserByUserName(username);
+		if(user.getId() == c.getUsers().getId()) 
+			m.addAttribute("contact", c);
 		return "norml/contact-details";
+	}
+	
+	// for delete the contact
+	@GetMapping("/delete/{cid}")
+	public String delete(@PathVariable("cid") Integer cid, Principal principal, HttpSession session) {
+		// first find the id
+		Optional<Contact> contactop = contactRepo.findById(cid);
+		// using the id we get all info of that id
+		Contact contact = contactop.get();
+		
+		// after get the info we use delete method to delete 
+		contact.setUsers(null);
+		contactRepo.delete(contact);
+		System.out.println("Deleted");
+	
+		
+		return "redirect:/user/view-contacts/0";
+		
+	}
+	// open the update contact
+	@GetMapping("/open-update/{cid}")
+	public String update(@PathVariable("cid") Integer cid, Model model) {
+		Optional<Contact> contactop = contactRepo.findById(cid);
+		Contact contact = contactop.get();
+		model.addAttribute("contact", contact);
+		
+		return "norml/update";
+	}
+	
+	// update the contact
+	@PostMapping("/process-update/{cid}")
+	public String processupdate(@PathVariable("cid") Integer cid, @ModelAttribute("contact") Contact contact) {
+		Contact oldcontact = contactRepo.findById(cid).get();
+		oldcontact.setName(contact.getName());
+		oldcontact.setNickname(contact.getNickname());
+		oldcontact.setPhoneno(contact.getPhoneno());
+		oldcontact.setEmail(contact.getEmail());
+		oldcontact.setWork(contact.getWork());
+		oldcontact.setDescription(contact.getDescription());
+		contactRepo.save(oldcontact);
+		
+		
+		return "redirect:/user/view-contacts/0";
 	}
 }

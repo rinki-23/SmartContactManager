@@ -8,7 +8,10 @@
 	
 	<section>
 	<div class = "card mr-3 ml-3">
-		<div class = "card-body">
+		<div class = "card-body" >
+		
+	</div>
+	
 			<h1 class = "text-center">Your Contacts</h1>
 			
 			<table class="table table-bordered">
@@ -38,8 +41,9 @@
       </td>
       <td th:text = "${c.phoneno}">@mdo</td>
       <td>
-      <button class = "btn btn-danger btn-sm">Delete</button>
-      <button class = "btn btn-danger btn-primary">Update</button>
+      <!-- call the method which is declare in base.html and use pipe for dynamic value -->
+      <a href = "#" th:onClick = "|deletecontact(${c.cid})|" class = "btn btn-danger btn-sm">Delete</a>
+      <a th:href = "@{'/user/open-update/' + ${c.cid}}" class = "btn  btn-primary btn-sm">Update</a>
       </td>
     </tr>
  
@@ -64,6 +68,8 @@
 </nav>
 		
 		</div>
+		
+		
 	
 	</div>
 	
