@@ -164,13 +164,16 @@ public class UserController {
 	@GetMapping("/delete/{cid}")
 	public String delete(@PathVariable("cid") Integer cid, Principal principal, HttpSession session) {
 		// first find the id
-		Optional<Contact> contactop = contactRepo.findById(cid);
-		// using the id we get all info of that id
-		Contact contact = contactop.get();
+		Contact contact = contactRepo.findById(cid).get();
 		
-		// after get the info we use delete method to delete 
-		contact.setUsers(null);
-		contactRepo.delete(contact);
+		
+		// get all the username of the login user
+		User user = userRepo.getUserByUserName(principal.getName());
+		boolean removed = user.getContacts().remove(contact);
+		System.out.println("Removed" + removed);
+		
+		// delete because we use orphanRemoval = true
+		userRepo.save(user);
 		System.out.println("Deleted");
 	
 		
@@ -201,5 +204,12 @@ public class UserController {
 		
 		
 		return "redirect:/user/view-contacts/0";
+	}
+	
+	// your profile
+	@GetMapping("/profile")
+	public String profile(Model m) {
+		m.addAttribute("title", "Profile Page");
+		return "norml/profile";
 	}
 }

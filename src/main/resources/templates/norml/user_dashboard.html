@@ -8,12 +8,25 @@
 	
 	<section>
 	
-	<h1>Name: <span th:text = "${User.name}"></span></h1>
-	<h1>Email: <span th:text = "${User.email}"></span></h1>
-	<h1>Role: <span th:text = "${User.role}"></span></h1>
-	<h1>About: <span th:text = "${User.about}"></span></h1>
+	<div class = "container">
+		<div class = "card my-5">
+			<div class = "card-body">
+				<div class = "container text-center">
+					<img style = "height:200px; width : 200px;" class = "my-profile-picture" th:src = "@{'/img/contact.jpg}">
+				
+				</div>
+			
+			<h1 class = "text-center mt-3 text-secondary font-italic font-weight-light">
+			Start adding your account on cloud
+			
+			</h1>
+			
+		<a th:href = "@{/user/add_contact}" class = "btn btn-primay btn-block text-uppercase">Add New contacts</a>>
+			</div>
+		
+		</div>
 	
-	<h1><a href= "" th:href = "@{/logout}">Logout</a></h1>
+	</div>
 	
 	
 	</section>
