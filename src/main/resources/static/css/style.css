@@ -112,4 +112,16 @@ body{
 	border : 1px solid black;
 }
 
+/*search result */
+.search-container{
+	position : relative;
+}
+.search-result{
+	position : absolute;
+	background : white;
+	width : 100%;
+	padding : 10px;
+	border : 1px solid grey;
+}
+
 

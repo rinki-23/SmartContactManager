@@ -1,6 +1,8 @@
 package com.smart.dao;
 
+
 import com.smart.entities.Contact;
+import com.smart.entities.User;
 
 import java.util.List;
 
@@ -17,4 +19,5 @@ public interface ContactREpo extends JpaRepository<Contact, Integer>{
 	
 	public Page<Contact> findContactsByUser(@Param("userId") int userId, Pageable pageable);
 
+	public List<Contact> findByNameContainingAndUsers(String name, User users);
 }
