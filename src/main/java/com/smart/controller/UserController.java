@@ -212,4 +212,11 @@ public class UserController {
 		m.addAttribute("title", "Profile Page");
 		return "norml/profile";
 	}
+	
+	// open setting 
+	@GetMapping("/setting")
+	public String settings(Model m) {
+		m.addAttribute("title", "Setting");
+		return "norml/settings";
+	}
 }

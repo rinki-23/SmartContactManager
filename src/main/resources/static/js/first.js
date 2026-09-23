@@ -45,6 +45,6 @@ const search= ()=>{
 			$(".search-result").show();
 			
 		})
-		$(".search-result").show();
+	
 	}
 }

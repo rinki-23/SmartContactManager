@@ -21,13 +21,20 @@
 			
 			</h1>
 			
-		<a th:href = "@{/user/add_contact}" class = "btn btn-primay btn-block text-uppercase">Add New contacts</a>>
+		<a th:href = "@{/user/add-contact}" class = "btn btn-primay btn-block text-uppercase">Add New contacts</a>>
 			</div>
 		
 		</div>
 	
 	</div>
 	
+	<script>
+	$(document).ready(() => {
+	$(".item").removeClass("active");
+	$("#home-link").addClass("active");
+	}); 
+	
+	</script>
 	
 	</section>
 
