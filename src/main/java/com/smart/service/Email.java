@@ -33,7 +33,7 @@ public class Email {
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
 				// TODO Auto-generated method stub
-				return new PasswordAuthentication("rinkimittal2006@gmail.com", "rjhp lrxo vmnn pxkt");
+				return new PasswordAuthentication("rinkimittal2006@gmail.com", "********");
 			}
 			
 		});
