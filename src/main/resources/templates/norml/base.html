@@ -70,6 +70,11 @@
 	<p th:text = "${session.message.content}"></p>
 	</div>
 	
+	<!-- use for redirect attribute use in password controller -->
+	<div th:if  = "${message}" th:class = "${message.type}">
+		<span th:text = "${message.content}"></span>
+	</div>
+	
 		
 		</div>
 		<div th:replace = "${content}">

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang = "en" xmlns:th = "http://www.thymeleaf.org" th:replace = "~{norml/base::layout(~{::section})}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<section>
+
+				
+				<div class = "container">
+		<div class = "row">
+			<div class = "col-md-12">
+				<div class = "card">
+				<!-- use for redirect attribute use in password controller -->
+	<div th:if  = "${message != null}" th:class = "${message.type}">
+		<span th:text = "${message.content}"></span>
+	</div>
+	
+					<div class = "card-body">
+						<h1 class = "mb-3">Verify otp</h1>
+						<form action = "" th:action = "@{/user/verify-otp}" method = "post">
+						
+				
+						<div class = "form-group">
+							<input name = "otp" type = "text" class = "form-control" placeholder = "Enter otp">
+						</div>
+						
+						<div class = "form-group">
+							<input name = "newpassword" type = "password" class = "form-control" placeholder = "Enter new password">
+						</div>
+						
+						
+						<div class = "container text-center">
+						<button type = "submit" class = "btn btn-success">Change</button>
+						</div>
+						</form>
+					
+					</div>
+				
+				</div>
+			
+			
+			</div>
+		
+		</div>
+	
+	</div>
+</section>
+</body>
+</html>

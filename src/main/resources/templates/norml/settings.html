@@ -12,16 +12,16 @@
 				<div class = "card">
 					<div class = "card-body">
 						<h1 class = "mb-3">Change Password</h1>
-						<form action = "">
+						<form th:action = "@{/user/change-password}" method = "post" action = "">
 						
 						<!-- old password field -->
 						<div class = "form-group">
-							<input type = "text" class = "form-control" placeholder = "Enter old password">
+							<input name = "oldPassword" type = "password" class = "form-control" placeholder = "Enter old password">
 						</div>
-						
+						<a class = "forgot m-1" th:href = "@{/user/password}">Forgot Password ?</a>
 						<!-- new password -->
 						<div class = "form-group">
-							<input type = "text" class = "form-control" placeholder = "Enter new password">
+							<input name = "newPassword" type = "password" class = "form-control mt-2" placeholder = "Enter new password">
 						</div>
 						
 						<div class = "container text-center">
